@@ -1,0 +1,37 @@
+version: "2"
+services:
+  api_envios:
+    container_name: api_envios_dev
+#    image: api_envios_dev:1.0
+    # build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: uvicorn main:app --host="0.0.0.0" --port=9777 --reload
+    volumes:
+      - /usr/local/volumes/fileserver/envios_dev/:/app/fileserver/
+    ports:
+      - "9777:9777"
+#services:
+  # Our main app
+#  envios:
+#    build: .
+#    command: uvicorn main:app --host 0.0.0.0 --port 9776 --reload
+#    volumes:
+#      - ./tancho:/tancho
+#    ports:
+#      - "9776:9776"
+#    depends_on:
+#        - mongo
+
+  # MongoDB as a service
+#  mongo:
+#    image: mongo
+#    restart: always
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: "tancho"
+#      MONGO_INITDB_ROOT_PASSWORD: "4dm1n4dm1n"
+#    volumes:
+#        - mongo_data:/data/db
+#    ports:
+#      - "27017:27017"
